@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmc.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.zmc.model.Order">
+    <result column="o_id" jdbcType="INTEGER" property="oId" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="ship_date" jdbcType="TIMESTAMP" property="shipDate" />
+    <result column="ostatus" jdbcType="VARCHAR" property="ostatus" />
+    <result column="complete" jdbcType="BIT" property="complete" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zmc.model.Order">
+    insert into order (o_id, p_id, quantity, 
+      ship_date, ostatus, complete
+      )
+    values (#{oId,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{shipDate,jdbcType=TIMESTAMP}, #{ostatus,jdbcType=VARCHAR}, #{complete,jdbcType=BIT}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select o_id, p_id, quantity, ship_date, ostatus, complete
+    from order
+  </select>
+</mapper>

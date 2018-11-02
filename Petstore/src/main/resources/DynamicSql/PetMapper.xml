@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmc.dao.PetMapper">
+  <resultMap id="BaseResultMap" type="com.zmc.model.Pet">
+    <id column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="photo_urls" jdbcType="VARCHAR" property="photoUrls" />
+    <result column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pet
+    where p_id = #{pId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmc.model.Pet">
+    insert into pet (p_id, c_id, p_name, 
+      photo_urls, t_id, status
+      )
+    values (#{pId,jdbcType=INTEGER}, #{cId,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR}, 
+      #{photoUrls,jdbcType=VARCHAR}, #{tId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zmc.model.Pet">
+    update pet
+    set c_id = #{cId,jdbcType=INTEGER},
+      p_name = #{pName,jdbcType=VARCHAR},
+      photo_urls = #{photoUrls,jdbcType=VARCHAR},
+      t_id = #{tId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR}
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select p_id, c_id, p_name, photo_urls, t_id, status
+    from pet
+    where p_id = #{pId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select p_id, c_id, p_name, photo_urls, t_id, status
+    from pet
+  </select>
+</mapper>
